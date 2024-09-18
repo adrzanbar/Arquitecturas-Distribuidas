@@ -1,0 +1,10 @@
+# Ignore the .vscode directory
+.vscode/
+
+# Ignore everything inside any `src` directory
+**/src/*
+
+# Except for specific files in any `src` directory
+!**/src/**/*.cpp
+!**/src/**/*.h
+!**/src/Makefile

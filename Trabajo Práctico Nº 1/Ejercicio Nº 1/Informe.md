@@ -124,25 +124,29 @@ Efficiency: 0.78884
 
 ![Codespaces Multithreaded](./images/codespaces_multithreaded_2.png)
 
-#### 4 hilos
+### Computadora
 
 ```plaintext
-Enter value of x (default: 150000): 
-Enter number of terms (default: 10000000): 
-Enter number of runs (default: 10): 
-Enter number of threads (default: 2): 4
+Enter value of x (default: 150000):
+Enter number of terms (default: 10000000):
+Enter number of runs (default: 10):
+Enter number of threads (default: 4):
 Running sequential version
 Running multithreading version
 
 Performance Metrics:
-Average Sequential Time: 4.66372 seconds
-Average Multithreaded Time: 2.94382 seconds
-Speedup: 1.58424
-Efficiency: 0.39606
+Average Sequential Time: 4.44479 seconds
+Average Multithreaded Time: 1.50121 seconds
+Speedup: 2.96081
+Efficiency: 0.740202
 ```
+![Computer Sequential](./images/computer_sequential.png)
 
-![Codespaces Sequential](./images/codespaces_sequential_4.png)
+![Computer Multithreaded](./images/computer_multithreaded.png)
 
-![Codespaces Multithreaded](./images/codespaces_multithreaded_4.png)
 
-### Computadora
+## Como correr
+
+> /src/ $ make
+
+> /src/ $ ./logarithm
