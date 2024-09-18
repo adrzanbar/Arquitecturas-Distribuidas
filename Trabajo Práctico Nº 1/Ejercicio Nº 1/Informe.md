@@ -1,4 +1,4 @@
-# Trabajo Práctivo N° 1: Informe
+# Trabajo Práctico N° 1: Informe
 
 - Universidad Nacional de Cuyo
 - Facultad de Ingeniería
