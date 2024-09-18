@@ -145,7 +145,7 @@ Efficiency: 0.740202
 ![Computer Multithreaded](./images/computer_multithreaded.png)
 
 
-## Como correr
+## Cómo correr
 
 > /src/ $ make
 
