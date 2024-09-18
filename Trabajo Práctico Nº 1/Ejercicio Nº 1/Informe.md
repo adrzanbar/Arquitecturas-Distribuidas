@@ -99,7 +99,7 @@ NUMA:
   NUMA node0 CPU(s):      0-3
 ```
 
-## Experimentos
+## Ejercicio 1
 
 ### Codespaces
 
@@ -149,4 +149,4 @@ Efficiency: 0.740202
 
 > /src/ $ make
 
-> /src/ $ ./logarithm
+> /src/ $ ./run
