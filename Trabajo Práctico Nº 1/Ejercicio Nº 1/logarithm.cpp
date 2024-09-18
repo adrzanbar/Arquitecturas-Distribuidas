@@ -8,15 +8,16 @@
 #include <numeric>
 #include <functional>
 #include <string>
+#include <fstream>
+#include <sstream>
 
 class TaylorSeriesCalculator
 {
 public:
-    TaylorSeriesCalculator(long double x, int numTerms) : x(x), numTerms(numTerms)
+    // Constructor that accepts x, numTerms, and numThreads
+    TaylorSeriesCalculator(long double x, unsigned int numTerms, unsigned int numThreads)
+        : x(x), numTerms(numTerms), numThreads(numThreads)
     {
-        numThreads = std::thread::hardware_concurrency();
-        if (numThreads == 0)
-            numThreads = 2;
     }
 
     long double sequential() const
@@ -25,7 +26,7 @@ public:
         long double term;
         long double y = (x - 1) / (x + 1);
 
-        for (int n = 0; n < numTerms; ++n)
+        for (unsigned int n = 0; n < numTerms; ++n)
         {
             term = 1.0 / (2 * n + 1) * std::pow(y, 2 * n + 1);
             result += term;
@@ -40,15 +41,15 @@ public:
         std::vector<long double> results(numThreads, 0.0);
         std::mutex resultMutex;
 
-        auto worker = [&](int threadIndex)
+        auto worker = [&](unsigned int threadIndex)
         {
             long double localResult = 0.0;
-            int chunkSize = numTerms / numThreads;
-            int start = threadIndex * chunkSize;
-            int end = (threadIndex == numThreads - 1) ? numTerms : start + chunkSize;
+            unsigned int chunkSize = numTerms / numThreads;
+            unsigned int start = threadIndex * chunkSize;
+            unsigned int end = (threadIndex == numThreads - 1) ? numTerms : start + chunkSize;
             long double y = (x - 1) / (x + 1);
 
-            for (int n = start; n < end; ++n)
+            for (unsigned int n = start; n < end; ++n)
             {
                 long double term = 1.0 / (2 * n + 1) * std::pow(y, 2 * n + 1);
                 localResult += term;
@@ -58,7 +59,7 @@ public:
             results[threadIndex] = localResult;
         };
 
-        for (int i = 0; i < numThreads; ++i)
+        for (unsigned int i = 0; i < numThreads; ++i)
         {
             threads.emplace_back(worker, i);
         }
@@ -83,53 +84,130 @@ private:
     unsigned int numThreads;
 };
 
-// Logging function with precision parameter
-template <typename Func>
-void log(const std::string &funcName, Func &&func, int precision)
+class RunLogger
 {
-    // Default precision to 1 if it is 0 or negative
-    if (precision <= 0)
-        precision = 1;
+public:
+    RunLogger() {}
 
-    std::cout << "Running: " << funcName << std::endl;
-    auto startTime = std::chrono::high_resolution_clock::now();
+    void log(long double elapsedTime)
+    {
+        runs.emplace_back(elapsedTime); // Append the elapsed time of the run
+    }
 
-    long double result = func();
+    long double average() const
+    {
+        if (runs.empty())
+            return 0.0;
 
-    auto endTime = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> elapsed = endTime - startTime;
+        return std::accumulate(runs.begin(), runs.end(), 0.0) / runs.size();
+    }
 
-    // Set precision for the result output
-    std::cout << std::fixed << std::setprecision(precision);
-    std::cout << "Result: " << result << std::endl;
-    std::cout << "Elapsed time: " << elapsed.count() << " seconds." << std::endl;
+private:
+    std::vector<long double> runs; // Stores elapsed times
+};
+
+// Template function for getting user input with default values
+template <typename T>
+T getInput(const std::string &prompt, T defaultValue)
+{
+    std::cout << prompt << " (default: " << defaultValue << "): ";
+    std::string input;
+    std::getline(std::cin, input);
+    if (input.empty())
+    {
+        return defaultValue;
+    }
+    try
+    {
+        if (std::is_same<T, int>::value)
+        {
+            return std::stoi(input);
+        }
+        else if (std::is_same<T, long double>::value)
+        {
+            return std::stod(input);
+        }
+        else if (std::is_same<T, unsigned int>::value)
+        {
+            return std::stoul(input);
+        }
+        else
+        {
+            throw std::invalid_argument("Unsupported type");
+        }
+    }
+    catch (const std::invalid_argument &)
+    {
+        std::cerr << "Invalid input. Using default value: " << defaultValue << std::endl;
+        return defaultValue;
+    }
+}
+
+unsigned int getOptimalNumThreads()
+{
+    unsigned int numThreads = std::thread::hardware_concurrency();
+    if (numThreads == 0)
+        numThreads = 1; // Default to 1 if hardware_concurrency is not available
+    return numThreads;
 }
 
 int main()
 {
-    long double x = 1500000.0;
-    int numTerms = 10000000;
-    int precision = 15;
+    // Default values
+    long double defaultX = 1.5e5;
+    unsigned int defaultNumTerms = 1e7;
+    unsigned int defaultNumRuns = 10;
+    unsigned int defaultNumThreads = getOptimalNumThreads();
 
-    std::cout << "Enter the value of x (default " << x << "): ";
-    std::string xInput;
-    std::getline(std::cin, xInput);
-    if (!xInput.empty())
-        x = std::stold(xInput);
+    // Use the abstracted input function
+    long double x = getInput("Enter value of x", defaultX);
+    unsigned int numTerms = getInput("Enter number of terms", defaultNumTerms);
+    unsigned int numRuns = getInput("Enter number of runs", defaultNumRuns);
+    unsigned int numThreads = getInput("Enter number of threads", defaultNumThreads);
 
-    std::cout << "Enter the number of terms (default " << numTerms << "): ";
-    std::string numTermsInput;
-    std::getline(std::cin, numTermsInput);
-    if (!numTermsInput.empty())
-        numTerms = std::stoi(numTermsInput);
+    // Create an instance of TaylorSeriesCalculator with user-specified number of threads
+    TaylorSeriesCalculator calculator(x, numTerms, numThreads);
 
-    TaylorSeriesCalculator calculator(x, numTerms);
+    // Create instances of RunLogger
+    RunLogger sequentialLogger;
+    RunLogger multithreadedLogger;
 
-    log("sequential", [&calculator]()
-        { return calculator.sequential(); }, precision);
-    std::cout << "Number of Threads: " << calculator.getNumThreads() << std::endl;
-    log("multithreaded", [&calculator]()
-        { return calculator.multithreaded(); }, precision);
+    std::cout << "Running sequential version" << std::endl;
+    for (unsigned int i = 0; i < numRuns; ++i)
+    {
+        auto start = std::chrono::high_resolution_clock::now();
+        calculator.sequential();
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<long double> elapsed = end - start;
+        sequentialLogger.log(elapsed.count());
+    }
+
+    std::cout << "Running multithreading version" << std::endl;
+    for (unsigned int i = 0; i < numRuns; ++i)
+    {
+        auto start = std::chrono::high_resolution_clock::now();
+        calculator.multithreaded();
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<long double> elapsed = end - start;
+        multithreadedLogger.log(elapsed.count());
+    }
+
+    // Calculate average times
+    long double avgSequentialTime = sequentialLogger.average();
+    long double avgMultithreadedTime = multithreadedLogger.average();
+
+    // Calculate speedup
+    long double speedup = avgSequentialTime / avgMultithreadedTime;
+
+    // Calculate efficiency
+    long double efficiency = speedup / numThreads;
+
+    // Print the results
+    std::cout << "\nPerformance Metrics:\n";
+    std::cout << "Average Sequential Time: " << avgSequentialTime << " seconds\n";
+    std::cout << "Average Multithreaded Time: " << avgMultithreadedTime << " seconds\n";
+    std::cout << "Speedup: " << speedup << "\n";
+    std::cout << "Efficiency: " << efficiency << "\n";
 
     return 0;
 }
