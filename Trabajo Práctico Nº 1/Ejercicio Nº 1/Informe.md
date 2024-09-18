@@ -120,9 +120,9 @@ Speedup: 1.57768
 Efficiency: 0.78884
 ```
 
-![Codespaces Sequential](./images/codespaces_sequential_2.png)
+![Codespaces Sequential](./images/codespaces_sequential.png)
 
-![Codespaces Multithreaded](./images/codespaces_multithreaded_2.png)
+![Codespaces Multithreaded](./images/codespaces_multithreaded.png)
 
 ### Computadora
 
