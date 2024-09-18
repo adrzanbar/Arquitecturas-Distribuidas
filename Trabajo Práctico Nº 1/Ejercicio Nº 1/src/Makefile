@@ -3,7 +3,7 @@ CXX = g++
 CXXFLAGS = -std=c++11 -pthread
 
 # Target executable
-TARGET = logarithm
+TARGET = run
 
 # Source files
 SRCS = logarithm.cpp
