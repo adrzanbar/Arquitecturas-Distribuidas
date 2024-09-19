@@ -8,3 +8,6 @@
 !**/src/**/*.cpp
 !**/src/**/*.h
 !**/src/Makefile
+
+# Ignore any .txt files nested anywhere
+**/*.txt
