@@ -1,4 +1,4 @@
-# Trabajo Práctivo N° 1: Informe
+# Trabajo Práctico N° 1: Informe
 
 - Universidad Nacional de Cuyo
 - Facultad de Ingeniería
@@ -99,7 +99,7 @@ NUMA:
   NUMA node0 CPU(s):      0-3
 ```
 
-## Experimentos
+## Ejercicio 1
 
 ### Codespaces
 
@@ -120,9 +120,9 @@ Speedup: 1.57768
 Efficiency: 0.78884
 ```
 
-![Codespaces Sequential](./images/codespaces_sequential_2.png)
+![Codespaces Sequential](./images/codespaces_sequential.png)
 
-![Codespaces Multithreaded](./images/codespaces_multithreaded_2.png)
+![Codespaces Multithreaded](./images/codespaces_multithreaded.png)
 
 ### Computadora
 
@@ -145,8 +145,8 @@ Efficiency: 0.740202
 ![Computer Multithreaded](./images/computer_multithreaded.png)
 
 
-## Como correr
+## Cómo correr
 
 > /src/ $ make
 
-> /src/ $ ./logarithm
+> /src/ $ ./run
