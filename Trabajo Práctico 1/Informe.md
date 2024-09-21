@@ -101,52 +101,28 @@ NUMA:
 
 ## Ejercicio 1
 
-### Codespaces
+### Codespaces (2 hilos)
 
-#### 2 hilos
 
-```plaintext
-Enter value of x (default: 150000): 
-Enter number of terms (default: 10000000): 
-Enter number of runs (default: 10): 
-Enter number of threads (default: 2): 
-Running sequential version
-Running multithreading version
 
-Performance Metrics:
-Average Sequential Time: 4.68569 seconds
-Average Multithreaded Time: 2.96999 seconds
-Speedup: 1.57768
-Efficiency: 0.78884
-```
+### Computadora (4 hilos)
 
-![Codespaces Sequential](./images/codespaces_sequential.png)
+## Ejercicio 1
 
-![Codespaces Multithreaded](./images/codespaces_multithreaded.png)
+### Codespaces (2 hilos)
 
-### Computadora
 
-```plaintext
-Enter value of x (default: 150000):
-Enter number of terms (default: 10000000):
-Enter number of runs (default: 10):
-Enter number of threads (default: 4):
-Running sequential version
-Running multithreading version
 
-Performance Metrics:
-Average Sequential Time: 4.44479 seconds
-Average Multithreaded Time: 1.50121 seconds
-Speedup: 2.96081
-Efficiency: 0.740202
-```
-![Computer Sequential](./images/computer_sequential.png)
+### Computadora (4 hilos)## Ejercicio 1
 
-![Computer Multithreaded](./images/computer_multithreaded.png)
+### Codespaces (2 hilos)
+
+
+
+### Computadora (4 hilos)
+
 
 
 ## Cómo correr
 
-> /src/ $ make
-
-> /src/ $ ./run
+> /src/ $ make run

@@ -1,43 +1,7 @@
 #include "ln_taylor_series.h"
 #include <string>
 #include <iomanip>
-
-// Template function for getting user input with default values
-template <typename T>
-T getInput(const std::string &prompt, T defaultValue)
-{
-    std::cout << prompt << " (default: " << defaultValue << "): ";
-    std::string input;
-    std::getline(std::cin, input);
-    if (input.empty())
-    {
-        return defaultValue;
-    }
-    try
-    {
-        if (std::is_same<T, int>::value)
-        {
-            return std::stoi(input);
-        }
-        else if (std::is_same<T, long double>::value)
-        {
-            return std::stod(input);
-        }
-        else if (std::is_same<T, unsigned int>::value)
-        {
-            return std::stoul(input);
-        }
-        else
-        {
-            throw std::invalid_argument("Unsupported type");
-        }
-    }
-    catch (const std::invalid_argument &)
-    {
-        std::cerr << "Invalid input. Using default value: " << defaultValue << std::endl;
-        return defaultValue;
-    }
-}
+#include "input_utils.h"
 
 int main()
 {
