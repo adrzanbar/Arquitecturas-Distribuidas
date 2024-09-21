@@ -101,28 +101,279 @@ NUMA:
 
 ## Ejercicio 1
 
-### Codespaces (2 hilos)
+### Codespaces
+
+![CSS1](./images/css1.png)
+
+![CSM1](./images/csm1.png)
+
+#### Output
+
+```plaintext
+Enter value of x (default: 1.5e+06): 
+Enter number of terms (default: 10000000): 
+Enter number of threads (default: 2): 
+Running sequential...
+Finished running sequential
+Running multithreaded...
+Finished running multithreaded
+Sequential Time: 4.65159 seconds
+Multithreaded Time: 2.81867 seconds
+Number of Threads Used: 2
+Number of Threads Available on System: 2
+Speedup: 1.65028
+Efficiency: 0.825141
+Sequential result: 14.220975666072336
+Multithreaded result: 14.220975666072350
+```
+
+### Computadora
+
+![PCS1](./images/pcs1.png)
+
+![PCM1](./images/pcm1.png)
+
+#### Output
+
+```plaintext
+Enter value of x (default: 1.5e+06):
+Enter number of terms (default: 10000000):
+Enter number of threads (default: 4):
+Running sequential...
+Finished running sequential
+Running multithreaded...
+Finished running multithreaded
+Sequential Time: 7.07629 seconds
+Multithreaded Time: 3.20959 seconds
+Number of Threads Used: 4
+Number of Threads Available on System: 4
+Speedup: 2.20473
+Efficiency: 0.551184
+Sequential result: 14.220975666072336
+Multithreaded result: 14.220975666072350
+```
+
+## Ejercicio 2
+
+### Codespaces
+
+![CSS2](./images/css2.png)
+
+![CSM2](./images/csm2.png)
+
+##### Output
+
+```plaintext
+Running sequential...
+Finished running sequential
+Running multithreaded...
+Finished running multithreaded
+Sequential Time: 1.89767 seconds
+Multithreaded Time: 1.52233 seconds
+Number of Threads Used: 20
+Number of Threads Available on System: 2
+Speedup: 1.24655
+Efficiency: 0.0623276
+Pattern             Occurrences (Seq)   Occurrences (Multi) 
+------------------------------------------------------------
+1328urt9wefh                  0                             0                             
+3re23dfw2df                   0                             0                             
+3rt3f34f34                    0                             0                             
+asdfsadfsda                   0                             0                             
+dslfsdlñfalñ                0                             0                             
+ertertrett                    6                             6                             
+fdsfds                        3622                          3622                          
+fdsfsdfawr32                  14                            14                            
+fdsñlfjsldkfjlñjlsdjflsd    0                             0                             
+fjp2wñ{ffwnlwk43nlk          3                             3                             
+fjsdlkñfjasld                0                             0                             
+fjsldfjsdñfjlñ              2                             2                             
+fsjdlafjsdlf                  0                             0                             
+fsjdlafjsdlfsda               0                             0                             
+fsjdlaflf                     0                             0                             
+rw254t6g3t34                  0                             0                             
+sdds                          0                             0                             
+sdlfjasldñjflñsadf          0                             0                             
+sdlfñlasd                    0                             0                             
+werrfew                       4                             4 
+```
+
+### Computadora
+
+![PCS2](./images/pcs2.png)
+
+![PCM2](./images/pcm2.png)
+
+##### Output
+
+```plaintext
+Running sequential...
+Finished running sequential
+Running multithreaded...
+Finished running multithreaded
+Sequential Time: 3.90347 seconds
+Multithreaded Time: 1.86415 seconds
+Number of Threads Used: 20
+Number of Threads Available on System: 4
+Speedup: 2.09397
+Efficiency: 0.104698
+Pattern             Occurrences (Seq)   Occurrences (Multi)
+------------------------------------------------------------
+1328urt9wefh                  0                             0
+3re23dfw2df                   0                             0
+3rt3f34f34                    0                             0
+asdfsadfsda                   0                             0
+dslfsdlñfalñ                0                             0
+ertertrett                    6                             6
+fdsfds                        3622                          3622
+fdsfsdfawr32                  14                            14
+fdsñlfjsldkfjlñjlsdjflsd    0                             0
+fjp2wñ{ffwnlwk43nlk          3                             3
+fjsdlkñfjasld                0                             0
+fjsldfjsdñfjlñ              2                             2
+fsjdlafjsdlf                  0                             0
+fsjdlafjsdlfsda               0                             0
+fsjdlaflf                     0                             0
+rw254t6g3t34                  0                             0
+sdds                          0                             0
+sdlfjasldñjflñsadf          0                             0
+sdlfñlasd                    0                             0
+werrfew                       4                             4
+```
+
+## Ejercicio 3
+
+### Codespaces
+
+![CSS3](./images/css3.png)
+
+![CSM3](./images/csm3.png)
+
+##### Output
+
+```plaintext
+Enter the size of the matrix (default: 3000): 
+Enter the number of threads (default: 2): 
+Matrix A:
+0.809454 ... 0.543437
+... ... ...
+0.453599 ... 0.306126
+Matrix B:
+0.0627114 ... 0.732278
+... ... ...
+0.917257 ... 0.096726
+Running sequential...
+Finished running sequential
+Running multithreaded...
+Finished running multithreaded
+Sequential Time: 560.549 seconds
+Multithreaded Time: 449.837 seconds
+Number of Threads Used: 2
+Number of Threads Available on System: 2
+Speedup: 1.24611
+Efficiency: 0.623057
+Result sequential:
+732.708 ... 756.919
+... ... ...
+742.224 ... 759.29
+Result multithreaded:
+732.708 ... 756.919
+... ... ...
+742.224 ... 759.29
+```
+
+### Computadora
+
+![PCS3](./images/pcs3.png)
+
+![PCM3](./images/pcm3.png)
 
 
+##### Output
 
-### Computadora (4 hilos)
+```plaintext
+Enter the size of the matrix (default: 3000):
+Enter the number of threads (default: 4):
+Matrix A:
+0.810385 ... 0.973673
+... ... ...
+0.523292 ... 0.500065
+Matrix B:
+0.592636 ... 0.323158
+... ... ...
+0.263162 ... 0.741203
+Running sequential...
+Finished running sequential
+Running multithreaded...
+Finished running multithreaded
+Sequential Time: 1184.19 seconds
+Multithreaded Time: 465.832 seconds
+Number of Threads Used: 4
+Number of Threads Available on System: 4
+Speedup: 2.5421
+Efficiency: 0.635524
+Result sequential:
+745.062 ... 758.485
+... ... ...
+743.502 ... 747.914
+Result multithreaded:
+745.062 ... 758.485
+... ... ...
+743.502 ... 747.914
+```
 
-## Ejercicio 1
+# Ejercicio 4
 
-### Codespaces (2 hilos)
+### Codespaces
 
+![CSS4](./images/css4.png)
 
-
-### Computadora (4 hilos)## Ejercicio 1
-
-### Codespaces (2 hilos)
+![CSM4](./images/csm4.png)
 
 
+##### Output
 
-### Computadora (4 hilos)
+```plaintext
+Enter N (default: 100000000): 
+Running sequential...
+Finished running sequential
+Running multithreaded...
+Finished running multithreaded
+Sequential Time: 34.3567 seconds
+Multithreaded Time: 35.3442 seconds
+Number of Threads Used: 2
+Number of Threads Available on System: 2
+Speedup: 0.972061
+Efficiency: 0.48603
+Top 10 prime numbers (sequential): 99999787 99999821 99999827 99999839 99999847 99999931 99999941 99999959 99999971 99999989 
+Top 10 prime numbers (multithreaded): 99999787 99999821 99999827 99999839 99999847 99999931 99999941 99999959 99999971 99999989 
+```
 
+### Computadora
 
+![PCS4](./images/pcs4.png)
+
+![PCM4](./images/pcm4.png)
+
+##### Output
+
+```plaintext
+Enter N (default: 100000000):
+Running sequential...
+Finished running sequential
+Running multithreaded...
+Finished running multithreaded
+Sequential Time: 125.225 seconds
+Multithreaded Time: 59.7122 seconds
+Number of Threads Used: 4
+Number of Threads Available on System: 4
+Speedup: 2.09714
+Efficiency: 0.524286
+Top 10 prime numbers (sequential): 99999787 99999821 99999827 99999839 99999847 99999931 99999941 99999959 99999971 99999989
+Top 10 prime numbers (multithreaded): 99999787 99999821 99999827 99999839 99999847 99999931 99999941 99999959 99999971 99999989
+```
 
 ## Cómo correr
 
+> /src/ $ make
 > /src/ $ make run
